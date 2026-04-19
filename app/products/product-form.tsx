@@ -74,7 +74,7 @@ export function ProductForm({ initial, mode }: Props) {
       <Field label="Giá nhập (VND)">
         <NumberInput value={values.importPrice} onChange={(v) => update('importPrice', v)} />
       </Field>
-      <div className="grid gap-5 md:grid-cols-3">
+      {/* <div className="grid gap-5 md:grid-cols-3">
         <Field label="Giá bán Facebook">
           <NumberInput value={values.facebookPrice} onChange={(v) => update('facebookPrice', v)} />
         </Field>
@@ -84,7 +84,7 @@ export function ProductForm({ initial, mode }: Props) {
         <Field label="Giá bán Shopee">
           <NumberInput value={values.shopeePrice} onChange={(v) => update('shopeePrice', v)} />
         </Field>
-      </div>
+      </div> */}
 
       {error && <p className="text-sm text-red-300">{error}</p>}
 
