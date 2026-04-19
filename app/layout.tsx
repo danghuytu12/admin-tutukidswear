@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: 'Admin • Quản lý sản phẩm',
   description: 'Trang quản trị CRUD sản phẩm',
 };
-
+export const dynamic = 'force-dynamic'
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="vi">
