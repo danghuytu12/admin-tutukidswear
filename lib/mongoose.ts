@@ -23,7 +23,7 @@ export async function connectDB(): Promise<Mongoose> {
   if (cache.conn) return cache.conn;
 
   
-  const uri = 'mongodb+srv://huytu4907_db_user:HA9Tf6CCSQPWSQBY@cluster0.axjrrqz.mongodb.net/';
+  const uri = 'mongodb+srv://huytu4907_db_user:HA9Tf6CCSQPWSQBY@cluster0.axjrrqz.mongodb.net?retryWrites=true&w=majority';
   console.log('MONGODB_URI', uri)
   if (!uri) {
     throw new Error('Missing MONGODB_URI environment variable');
