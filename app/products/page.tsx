@@ -102,7 +102,7 @@ function HeaderGroup() {
       <th className="px-3 py-2 text-right font-medium border-l border-white/10">Giá bán</th>
       <th className="px-3 py-2 text-right font-medium">Combo 2</th>
       <th className="px-3 py-2 text-right font-medium">Combo 3</th>
-      <th className="px-3 py-2 text-right font-medium">Lãi/1 sp</th>
+      {/* <th className="px-3 py-2 text-right font-medium">Lãi/1 sp</th> */}
     </>
   );
 }
@@ -159,9 +159,9 @@ function PriceGroup({
       <td className={`px-3 py-3 text-right border-l border-white/10 ${tone}`}>{vnd(base)}</td>
       <td className="px-3 py-3 text-right text-white/80">{vnd(combo2)}</td>
       <td className="px-3 py-3 text-right text-white/80">{vnd(combo3)}</td>
-      <td className={`px-3 py-3 text-right font-medium ${net >= 0 ? 'text-emerald-300' : 'text-red-300'}`}>
+      {/* <td className={`px-3 py-3 text-right font-medium ${net >= 0 ? 'text-emerald-300' : 'text-red-300'}`}>
         {vnd(net)}
-      </td>
+      </td> */}
     </>
   );
 }
