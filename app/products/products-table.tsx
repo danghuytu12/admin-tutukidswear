@@ -2,7 +2,15 @@
 
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
-import { combo2Price, combo3Price, netReceived, vnd, PLATFORM_FEE } from '@/lib/pricing';
+import {
+  vnd,
+  PLATFORM_NET_RATE,
+  targetSinglePrice,
+  targetCombo2Price,
+  targetCombo3Price,
+  facebookCombo2Price,
+  facebookCombo3Price,
+} from '@/lib/pricing';
 import { DeleteButton } from './delete-button';
 
 type ProductItem = {
@@ -124,27 +132,30 @@ function HeaderGroup() {
 }
 
 function ProductRowView({ product }: Readonly<{ product: ProductItem }>) {
-  const channelPrices: Record<Channel['key'], number> = {
-    facebook: product.facebookPrice,
-    tiktok: product.tiktokPrice,
-    shopee: product.shopeePrice,
-  };
-
   return (
     <tr className="border-t border-white/5">
       <td className="px-4 py-3 font-medium">{product.name}</td>
       <td className="px-4 py-3 text-right text-white/70">{vnd(product.importPrice)}</td>
       {CHANNELS.map((c) => {
-        const base = channelPrices[c.key];
-        const net = netReceived(base, product.importPrice, PLATFORM_FEE[c.key]);
+        if (c.key === 'facebook') {
+          return (
+            <PriceGroup
+              key={c.key}
+              tone={c.tone}
+              base={null}
+              combo2={facebookCombo2Price(product.importPrice)}
+              combo3={facebookCombo3Price(product.importPrice)}
+            />
+          );
+        }
+        const rate = PLATFORM_NET_RATE[c.key];
         return (
           <PriceGroup
             key={c.key}
             tone={c.tone}
-            base={base}
-            combo2={combo2Price(base)}
-            combo3={combo3Price(base)}
-            net={net}
+            base={targetSinglePrice(product.importPrice, rate)}
+            combo2={targetCombo2Price(product.importPrice, rate)}
+            combo3={targetCombo3Price(product.importPrice, rate)}
           />
         );
       })}
@@ -168,10 +179,12 @@ function PriceGroup({
   base,
   combo2,
   combo3,
-}: Readonly<{ tone: string; base: number; combo2: number; combo3: number; net: number }>) {
+}: Readonly<{ tone: string; base: number | null; combo2: number; combo3: number }>) {
   return (
     <>
-      <td className={`px-3 py-3 text-right border-l border-white/10 ${tone}`}>{vnd(base)}</td>
+      <td className={`px-3 py-3 text-right border-l border-white/10 ${tone}`}>
+        {base === null ? <span className="text-white/30">—</span> : vnd(base)}
+      </td>
       <td className="px-3 py-3 text-right text-white/80">{vnd(combo2)}</td>
       <td className="px-3 py-3 text-right text-white/80">{vnd(combo3)}</td>
     </>
