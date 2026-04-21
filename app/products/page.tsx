@@ -65,7 +65,7 @@ export default async function ProductsPage() {
               {CHANNELS.map((c) => (
                 <th
                   key={c.key}
-                  colSpan={4}
+                  colSpan={3}
                   className={`px-4 py-2 text-center border-l border-white/10 ${c.tone}`}
                 >
                   {c.label}
